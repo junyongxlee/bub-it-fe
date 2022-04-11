@@ -16,6 +16,7 @@
           class="form-control mt-2"
           id="longUrl"
           aria-describedby="longUrl"
+          v-model="longUrl"
         />
       </div>
       <div class="url-alias-input mt-3">
@@ -34,21 +35,61 @@
             id="alias"
             aria-describedby="alias"
             placeholder="alias"
+            v-model="alias"
           />
         </div>
       </div>
-
-      <div class="actions d-flex flex-row align-items-center mt-4">
-        <router-link to="/url" class="my-url-link col-4">My URL</router-link>
-        <button type="button" class="btn btn-bub-it col-8">Bub It</button>
+      <div v-if="errorMessage" class="text-danger fw-bold text-end mt-3 mb-1">
+        {{ errorMessage }}
+      </div>
+      <div
+        class="actions d-flex flex-row align-items-center"
+        :class="{ 'mt-4': !errorMessage }"
+      >
+        <router-link to="/url" class="my-url-link col-4 text-center"
+          >My URL</router-link
+        >
+        <button type="button" class="btn btn-bub-it col-8" @click="submit">
+          <span v-if="loading" class="spinner-border" role="status"></span>
+          <span v-else>Bub It</span>
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CreateUrlForm",
+  data() {
+    return {
+      longUrl: "",
+      alias: "",
+      errorMessage: "",
+      loading: false,
+    };
+  },
+  methods: {
+    submit: function () {
+      this.loading = true;
+      axios({
+        method: "POST",
+        url: "url",
+        data: { destination_url: this.longUrl, alias: this.alias },
+      }).then(
+        (result) => {
+          this.alias = result.data.url.alias;
+          console.log(result);
+        },
+        (error) => {
+          this.loading = false;
+          this.errorMessage = error.response.data.message;
+        }
+      );
+    },
+  },
 };
 </script>
 
