@@ -49,7 +49,11 @@
         <router-link to="/url" class="my-url-link col-4 text-center"
           >My URL</router-link
         >
-        <button type="button" class="btn btn-bub-it col-8" @click="submit">
+        <button
+          type="button"
+          class="btn btn-main btn-bub-it col-8"
+          @click="submit"
+        >
           <span v-if="loading" class="spinner-border" role="status"></span>
           <span v-else>Bub It</span>
         </button>
@@ -81,7 +85,8 @@ export default {
       }).then(
         (result) => {
           this.alias = result.data.url.alias;
-          console.log(result);
+          this.$emit("submitted", this.alias);
+          this.loading = false;
         },
         (error) => {
           this.loading = false;
@@ -129,19 +134,7 @@ export default {
   }
 
   .btn-bub-it {
-    background-color: #775942;
-    color: #fff;
-    font-weight: 800;
     height: 45px;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: #5f4836;
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 0.25rem #5f48364d;
-    }
   }
 }
 </style>

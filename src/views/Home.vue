@@ -3,10 +3,102 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex justify-content-center align-items-center">
-          <CreateUrlForm />
+          <CreateUrlForm @submitted="onFormSubmit" />
         </div>
         <div class="illustration col-lg-6">
           <img src="../assets/images/home-illustration.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="submittedModal"
+    tabindex="-1"
+    aria-labelledby="submittedModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body d-flex flex-column align-items-center">
+          <div class="title mb-2">Your Shortened Bub-URL :</div>
+          <div
+            class="d-flex w-100 justify-content-center mt-4"
+            style="z-index: 1"
+          >
+            <div class="link-box px-4 d-flex align-items-center col-7">
+              bub.junyong.me/{{ alias }}
+            </div>
+            <button
+              type="button"
+              class="
+                btn btn-copy btn-main
+                col-3
+                d-flex
+                justify-content-center
+                align-items-center
+              "
+              @click="copyLink"
+            >
+              <img
+                class="me-1"
+                src="../assets/icons/copy.svg"
+                width="17"
+                alt=""
+              />
+              Copy
+            </button>
+          </div>
+          <div class="link-message-wrapper">
+            <div
+              class="link-copied-message text-center p-1 px-4"
+              :class="{ show: showCopiedMessage }"
+            >
+              Link copied!
+            </div>
+          </div>
+
+          <div
+            class="
+              d-flex
+              justify-content-center
+              align-items-center
+              w-100
+              mt-4
+              mb-4
+              pt-3
+            "
+          >
+            <router-link to="/url" class="my-url-link col-4 text-center"
+              >My URLs</router-link
+            >
+            <button
+              type="button"
+              class="btn btn-main btn-detailed-stats col-5"
+              @click="submit"
+            >
+              <span v-if="loading" class="spinner-border" role="status"></span>
+              <span v-else
+                >Detailed stats
+                <img
+                  class="ms-1"
+                  width="14"
+                  src="../assets/icons/arrow-right.svg"
+                  alt=""
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -16,10 +108,29 @@
 <script>
 // @ is an alias to /src
 import CreateUrlForm from "@/components/CreateUrlForm.vue";
+import { Modal } from "bootstrap";
 
 export default {
   name: "Home",
   components: { CreateUrlForm },
+  data() {
+    return { alias: "", showCopiedMessage: false };
+  },
+  methods: {
+    onFormSubmit: function (alias) {
+      var myModal = new Modal(document.getElementById("submittedModal"));
+      myModal.show();
+      this.alias = alias;
+    },
+    copyLink: function () {
+      navigator.clipboard.writeText("bub.junyong.me/" + this.alias);
+      this.showCopiedMessage = true;
+      setTimeout(() => {
+        this.showCopiedMessage = false;
+      }, 2000);
+    },
+  },
+  mounted: function () {},
 };
 </script>
 
@@ -39,7 +150,65 @@ export default {
     max-width: 550px;
   }
 }
+.modal-content {
+  background: #fffaf5;
+  border-radius: 20px;
+  box-shadow: 8px 8px 54px rgba(0, 0, 0, 0.5);
+}
+.modal-header {
+  border-bottom: none;
+  z-index: 1;
+}
 
-.background-desktop-img {
+.modal-body {
+  margin-top: -40px !important;
+
+  .title {
+    font-weight: 600;
+    font-size: 22px;
+    color: #454545;
+  }
+
+  .link-box {
+    background: #ffffff;
+    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 10px 0 0 10px;
+    height: 55px;
+  }
+  .btn-copy {
+    font-weight: 700;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .my-url-link {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .btn-detailed-stats {
+    font-weight: 600;
+    height: 50px;
+    border-radius: 8px;
+  }
+}
+
+.link-message-wrapper {
+  position: relative;
+}
+
+.link-copied-message {
+  position: absolute;
+  top: -35px;
+  left: -100px;
+  transition: all 0.5s ease;
+  color: #ffffff;
+  background: #cfb49e;
+  border-radius: 0px 0px 5px 5px;
+  white-space: nowrap;
+  font-size: 15px;
+
+  &.show {
+    top: 0px;
+  }
 }
 </style>

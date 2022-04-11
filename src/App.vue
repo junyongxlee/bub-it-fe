@@ -41,4 +41,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #000;
 }
+
+.btn.btn-main {
+  background-color: #775942;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #5f4836;
+    color: #fff;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem #5f48364d;
+  }
+}
 </style>
