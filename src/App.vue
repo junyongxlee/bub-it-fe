@@ -40,6 +40,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000;
+
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: rgba(38, 38, 38, 0.85);
+  }
 }
 
 .btn.btn-main {
