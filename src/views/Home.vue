@@ -79,13 +79,13 @@
               pt-3
             "
           >
-            <router-link to="/url" class="my-url-link col-4 text-center"
-              >My URLs</router-link
+            <a @click="goToMyUrls" class="my-url-link col-4 text-center"
+              >My URLs</a
             >
             <button
               type="button"
               class="btn btn-main btn-detailed-stats col-5"
-              @click="submit"
+              @click="goToDetail"
             >
               <span v-if="loading" class="spinner-border" role="status"></span>
               <span v-else
@@ -114,12 +114,12 @@ export default {
   name: "Home",
   components: { CreateUrlForm },
   data() {
-    return { alias: "", showCopiedMessage: false };
+    return { alias: "", showCopiedMessage: false, myModal: null };
   },
   methods: {
     onFormSubmit: function (alias) {
-      var myModal = new Modal(document.getElementById("submittedModal"));
-      myModal.show();
+      this.myModal = new Modal(document.getElementById("submittedModal"));
+      this.myModal.toggle();
       this.alias = alias;
     },
     copyLink: function () {
@@ -128,6 +128,14 @@ export default {
       setTimeout(() => {
         this.showCopiedMessage = false;
       }, 2000);
+    },
+    goToMyUrls: function () {
+      this.myModal.hide();
+      this.$router.push("/url");
+    },
+    goToDetail: function () {
+      this.myModal.hide();
+      this.$router.push("/url/" + this.alias);
     },
   },
   mounted: function () {},
@@ -183,6 +191,7 @@ export default {
   .my-url-link {
     color: #000;
     font-weight: bold;
+    cursor: pointer;
   }
 
   .btn-detailed-stats {
