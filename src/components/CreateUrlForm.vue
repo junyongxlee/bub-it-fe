@@ -85,8 +85,18 @@ export default {
       }).then(
         (result) => {
           this.alias = result.data.url.alias;
-          this.$emit("submitted", this.alias);
           this.loading = false;
+          var userUrls = JSON.parse(localStorage.getItem("urls"));
+          console.log(userUrls);
+
+          if (userUrls == null) {
+            userUrls = [this.alias];
+          } else {
+            userUrls.push(this.alias);
+          }
+          localStorage.setItem("urls", JSON.stringify(userUrls));
+
+          this.$emit("submitted", this.alias);
         },
         (error) => {
           this.loading = false;
