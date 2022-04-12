@@ -46,6 +46,18 @@ export default {
     font-weight: 800;
     color: rgba(38, 38, 38, 0.85);
   }
+
+  h2 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #4f4f4f;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 20px;
+    color: #4f4f4f;
+  }
 }
 
 .btn.btn-main {

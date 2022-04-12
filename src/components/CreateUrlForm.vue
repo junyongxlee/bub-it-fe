@@ -47,7 +47,7 @@
         :class="{ 'mt-4': !errorMessage }"
       >
         <router-link to="/url" class="my-url-link col-4 text-center"
-          >My URL</router-link
+          >My URLs</router-link
         >
         <button
           type="button"
