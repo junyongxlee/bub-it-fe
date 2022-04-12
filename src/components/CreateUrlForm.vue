@@ -2,7 +2,7 @@
   <div class="create-url-form">
     <div class="card">
       <div class="url-input">
-        <div class="d-flex flex-row align-items-center ms-3">
+        <div class="d-flex flex-row align-items-center ms-lg-3">
           <div class="icon-wrapper d-flex" style="width: 29px">
             <img
               src="../assets/icons/link-double.svg"
@@ -10,7 +10,7 @@
               alt="Link Icon"
             />
           </div>
-          <p class="m-0 ms-2 fw-bold">Enter your long URL here</p>
+          <div class="m-0 ms-2 fw-bold label">Enter your long URL here</div>
         </div>
         <input
           class="form-control mt-2"
@@ -20,11 +20,11 @@
         />
       </div>
       <div class="url-alias-input mt-3">
-        <div class="d-flex flex-row align-items-center ms-3">
+        <div class="d-flex flex-row align-items-center ms-lg-3">
           <div class="icon-wrapper d-flex" style="width: 29px">
             <img src="../assets/icons/link.svg" height="18" alt="Link Icon" />
           </div>
-          <p class="m-0 ms-2 fw-bold">Customize your link</p>
+          <div class="m-0 ms-2 fw-bold label">Customize your link</div>
         </div>
         <div class="d-flex flex-row align-items-stretch">
           <div class="domain-box mt-2 d-flex align-items-center ps-3 pe-5">
@@ -46,12 +46,12 @@
         class="actions d-flex flex-row align-items-center"
         :class="{ 'mt-4': !errorMessage }"
       >
-        <router-link to="/url" class="my-url-link col-4 text-center"
+        <router-link to="/url" class="my-url-link col-5 col-lg-4 text-center"
           >My URLs</router-link
         >
         <button
           type="button"
-          class="btn btn-main btn-bub-it col-8"
+          class="btn btn-main btn-bub-it col-7 col-lg-8"
           @click="submit"
         >
           <span v-if="loading" class="spinner-border" role="status"></span>
@@ -145,6 +145,14 @@ export default {
 
   .btn-bub-it {
     height: 45px;
+  }
+}
+
+.label {
+  color: #000000;
+  font-size: 19px;
+  @media (max-width: 991.98px) {
+    font-size: 17px;
   }
 }
 </style>

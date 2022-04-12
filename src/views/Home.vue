@@ -1,11 +1,16 @@
 <template>
   <div class="home d-flex flex-column justify-content-center">
+    <div class="background desktop d-none d-lg-block"></div>
+    <div class="background mobile d-lg-none"></div>
+    <div class="illustration-mobile d-flex justify-content-center d-lg-none">
+      <img src="../assets/images/home-illustration-mobile.svg" alt="" />
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex justify-content-center align-items-center">
           <CreateUrlForm @submitted="onFormSubmit" />
         </div>
-        <div class="illustration col-lg-6">
+        <div class="illustration col-lg-6 d-none d-lg-block">
           <img src="../assets/images/home-illustration.svg" alt="" />
         </div>
       </div>
@@ -36,14 +41,15 @@
             class="d-flex w-100 justify-content-center mt-4"
             style="z-index: 1"
           >
-            <div class="link-box px-4 d-flex align-items-center col-7">
+            <div class="link-box px-4 d-flex align-items-center col-8">
               bub.junyong.me/{{ alias }}
             </div>
             <button
               type="button"
               class="
                 btn btn-copy btn-main
-                col-3
+                col-2
+                col-lg-3
                 d-flex
                 justify-content-center
                 align-items-center
@@ -56,7 +62,7 @@
                 width="17"
                 alt=""
               />
-              Copy
+              <span class="d-none d-lg-block">Copy</span>
             </button>
           </div>
           <div class="link-message-wrapper">
@@ -67,16 +73,16 @@
               Link copied!
             </div>
           </div>
-
+          <!-- Actions button desktop -->
           <div
             class="
-              d-flex
               justify-content-center
               align-items-center
               w-100
               mt-4
               mb-4
               pt-3
+              d-none d-lg-flex
             "
           >
             <a @click="goToMyUrls" class="my-url-link col-4 text-center"
@@ -98,6 +104,30 @@
                 />
               </span>
             </button>
+          </div>
+          <!-- Actions button mobile -->
+          <div
+            class="
+              d-lg-none d-flex
+              flex-column
+              align-items-center
+              w-100
+              mt-4
+              mb-4
+              pt-3
+            "
+          >
+            <button
+              type="button"
+              class="btn btn-main btn-detailed-stats col-6"
+              @click="goToDetail"
+            >
+              <span v-if="loading" class="spinner-border" role="status"></span>
+              <span v-else>Detailed stats </span>
+            </button>
+            <a @click="goToMyUrls" class="mt-4 my-url-link col-4 text-center"
+              >My URLs</a
+            >
           </div>
         </div>
       </div>
@@ -144,9 +174,6 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  background: url("../assets/images/home-background-desktop.png") no-repeat
-    bottom fixed;
-  background-size: 100% 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -155,9 +182,36 @@ export default {
   height: 100vh;
 
   .illustration img {
-    max-width: 550px;
+    max-width: 500px;
+  }
+
+  .illustration-mobile {
+    img {
+      max-width: 60%;
+      margin-bottom: -63px;
+    }
   }
 }
+
+.background {
+  background-size: 100% 100% !important;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  &.desktop {
+    background: url("../assets/images/home-background-desktop.png") no-repeat
+      bottom fixed;
+  }
+  &.mobile {
+    background: url("../assets/images/home-background-mobile.png") no-repeat
+      bottom fixed;
+  }
+}
+
 .modal-content {
   background: #fffaf5;
   border-radius: 20px;
@@ -192,12 +246,21 @@ export default {
     color: #000;
     font-weight: bold;
     cursor: pointer;
+    @media (max-width: 991.98px) {
+      font-weight: 600;
+      font-size: 15px;
+      color: #666666;
+    }
   }
 
   .btn-detailed-stats {
     font-weight: 600;
     height: 50px;
     border-radius: 8px;
+
+    @media (max-width: 991.98px) {
+      height: 36px;
+    }
   }
 }
 

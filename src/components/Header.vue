@@ -21,6 +21,10 @@ export default {
       max-width: 120px;
       margin-left: 40px;
       margin-top: 15px;
+
+      @media (max-width: 991.98px) {
+        max-width: 95px;
+      }
     }
   }
 }
