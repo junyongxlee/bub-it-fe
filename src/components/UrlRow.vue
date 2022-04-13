@@ -15,6 +15,7 @@
         justify-content-between
         py-4
         px-3
+        w-100
       "
     >
       <div class="d-flex">

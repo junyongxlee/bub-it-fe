@@ -1,28 +1,27 @@
 <template>
   <div class="clicks-container">
-    <div class="header row mb-3 px-2 pe-4">
-      <div class="col-1"></div>
-      <div class="col-6">Location</div>
-      <div class="col-5" style="margin-left: -5px">Timestamp</div>
+    <div class="header d-flex mb-3 px-2">
+      <div class="col-lg-1"></div>
+      <div class="col-6 col-lg-6">Location</div>
+      <div class="col-6 col-lg-5">Timestamp</div>
     </div>
-    <div class="body pe-3">
+    <div class="body">
       <div
         v-for="(click, index) in clicks"
         :key="click.url_alias"
         class=""
         :class="{ 'has-top-border': index != 0 }"
       >
-        <div class="px-2 row py-1 click-detail">
-          <div class="col-1">
+        <div class="px-2 d-flex py-1 click-detail">
+          <div class="col-lg-1">
             <img
-              class="me-1"
               src="../assets/icons/profile.svg"
-              width="15"
               alt=""
+              class="me-1 profile-icon"
             />
           </div>
-          <div class="col-6">{{ click.location }}</div>
-          <div class="col-5">{{ timeStamp(click.created_at) }}</div>
+          <div class="col-6 col-lg-6">{{ click.location }}</div>
+          <div class="col-6 col-lg-5">{{ timeStamp(click.created_at) }}</div>
         </div>
       </div>
     </div>
@@ -52,6 +51,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.clicks-container {
+  .profile-icon {
+    width: 15px;
+  }
+
+  @media (max-width: 991.98px) {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 15px;
+
+    padding: 20px 15px;
+
+    font-size: 14px;
+
+    .profile-icon {
+      display: none;
+    }
+  }
+}
+
 .header {
   font-weight: 800;
   font-size: 17px;
@@ -70,7 +89,11 @@ export default {
 .clicks-container .body {
   overflow: auto;
   overflow-x: hidden;
-  max-height: 35vh;
+  max-height: 32vh;
+
+  @media (max-width: 991.98px) {
+    max-height: 26vh;
+  }
 }
 
 ::-webkit-scrollbar {

@@ -34,7 +34,11 @@ export default {
   src: url("~@/assets/fonts/Nunito-ExtraBold.ttf");
   font-weight: 800;
 }
-
+@font-face {
+  font-family: "Nunito";
+  src: url("~@/assets/fonts/Nunito-Black.ttf");
+  font-weight: 900;
+}
 #app {
   font-family: "Nunito", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

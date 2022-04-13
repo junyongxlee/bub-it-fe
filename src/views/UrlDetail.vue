@@ -1,9 +1,10 @@
 <template>
   <div class="url-detail">
-    <div class="background"></div>
+    <div class="background desktop d-none d-lg-block"></div>
+    <div class="background mobile d-lg-none"></div>
     <button
       type="button"
-      class="btn btn-main btn-back"
+      class="btn btn-main btn-back d-none d-lg-block"
       @click="this.$router.push('/url')"
     >
       <div class="d-flex justify-content-center align-items-center">
@@ -16,21 +17,52 @@
         Back to My URLs
       </div>
     </button>
-    <h1 class="text-center mb-5">Detailed Stats</h1>
-    <div class="container col-8">
-      <div class="row pt-3">
-        <div class="col-7">
+    <div class="container col-lg-8">
+      <button
+        type="button"
+        class="btn btn-main btn-back mobile d-block d-lg-none"
+        @click="this.$router.push('/url')"
+      >
+        <div class="d-flex justify-content-center align-items-center">
+          <img
+            class="me-3"
+            src="../assets/icons/arrow-left-white.svg"
+            height="12"
+            alt=""
+          />
+          Back to My URLs
+        </div>
+      </button>
+      <h1 class="text-lg-center mb-3 mb-lg-5 detailed-stats-title">
+        Detailed Stats
+      </h1>
+      <div class="row pt-lg-3">
+        <div class="col-lg-7">
           <h2>Total URL Clicks</h2>
           <p>The total number of clicks that your link has received so far:</p>
           <div
-            class="d-inline-flex flex-column align-items-center clicks-box mb-5"
+            class="
+              d-flex d-lg-inline-flex
+              flex-column
+              align-items-center
+              clicks-box
+              mb-lg-5 mb-2
+            "
           >
             <div class="clicks">{{ clicks.length }}</div>
             <div class="label align-self-center">Clicks</div>
           </div>
           <Clicks :clicks="clicks" />
         </div>
-        <div class="col-5 d-flex justify-content-center align-items-start">
+        <div
+          class="
+            col-5
+            d-lg-flex
+            justify-content-center
+            align-items-start
+            d-none
+          "
+        >
           <img
             src="../assets/images/url-detail-illustration.png"
             alt="Illustration"
@@ -86,6 +118,13 @@ export default {
 
   font-weight: 600;
   font-size: 17px;
+
+  &.mobile {
+    position: static;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
 }
 
 .url-detail {
@@ -101,15 +140,22 @@ export default {
 }
 
 .background {
-  background: url("../assets/images/detailed-url-background.png") no-repeat
-    bottom fixed;
-  background-size: 100% 100%;
+  background-size: 100% 100% !important;
   height: 100%;
   width: 100%;
   z-index: -1;
   position: fixed;
   top: 0;
   bottom: 0;
+
+  &.desktop {
+    background: url("../assets/images/detailed-url-background.png") no-repeat
+      bottom fixed;
+  }
+  &.mobile {
+    background: url("../assets/images/detailed-url-background-mobile.png")
+      no-repeat bottom fixed;
+  }
 }
 
 .clicks-box {
@@ -120,11 +166,58 @@ export default {
     font-weight: 600;
     font-size: 25px;
     color: #313131;
+
+    @media (max-width: 991.98px) {
+      padding: 5px 30px;
+    }
   }
   .label {
     font-weight: 600;
     font-size: 17px;
     color: #5e5e5e;
+
+    @media (max-width: 991.98px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.url-detail .container {
+  padding-left: 21px;
+  padding-right: 21px;
+  margin-top: 60px;
+
+  h1 {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #app {
+    h1 {
+      font-size: 25px !important;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: 22px;
+      color: rgba(38, 38, 38, 0.85);
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  .detailed-stats-title:after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid #d0d0d0;
+    height: 0px;
+    width: 180px;
+    position: relative;
+    left: -2px;
   }
 }
 </style>
