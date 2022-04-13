@@ -52,6 +52,14 @@
             Copy
           </div>
         </button>
+        <div class="link-message-wrapper">
+          <div
+            class="link-copied-message text-center p-1 px-2"
+            :class="{ show: showCopiedMessage }"
+          >
+            Link copied!
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -141,5 +149,35 @@ export default {
 
 .has-line-top {
   border-top: 1px solid #b5b5b5;
+}
+
+.link-message-wrapper {
+  position: relative;
+}
+
+.link-copied-message {
+  position: absolute;
+  top: 3px;
+  left: -97px;
+  transition: all 0.5s ease;
+  color: #ffffff;
+  background: #cfb49e;
+  border-radius: 0px 0px 5px 5px;
+  white-space: nowrap;
+  font-size: 13px;
+  z-index: -1;
+  opacity: 0;
+  &.show {
+    opacity: 1;
+    top: 38px;
+  }
+
+  @media (max-width: 991.98px) {
+    left: -86px;
+
+    &.show {
+      top: 35px;
+    }
+  }
 }
 </style>
