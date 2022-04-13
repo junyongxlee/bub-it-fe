@@ -5,7 +5,7 @@
     <div class="container col-lg-9">
       <h1 class="text-lg-center mb-5 title">Your Recent Bub-URLs</h1>
       <div
-        v-if="urls.length == 0"
+        v-if="urls.length == 0 && !loading"
         class="
           no-url-found
           text-center
