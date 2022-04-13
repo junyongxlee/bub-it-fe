@@ -107,6 +107,7 @@ export default {
 
 .urls-container {
   overflow: auto;
+  overflow-x: hidden;
   height: 75vh;
 }
 
