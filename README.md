@@ -1,5 +1,5 @@
 # bub-it-fe
-
+This project was deployed to: https://bub.junyong.me/
 ## Project setup
 ```
 yarn install
