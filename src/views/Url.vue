@@ -1,8 +1,10 @@
 <template>
+  <div class="background desktop d-none d-lg-block"></div>
+  <div class="background mobile d-lg-none"></div>
   <div class="recent-url">
-    <div class="container col-9">
-      <h1 class="text-center mb-5">Your Recent Bub-URLs</h1>
-      <div class="urls-container px-5">
+    <div class="container col-lg-9">
+      <h1 class="text-lg-center mb-5 title">Your Recent Bub-URLs</h1>
+      <div class="urls-container px-lg-5">
         <UrlRow
           v-for="(url, index) in urls"
           :key="url.alias"
@@ -57,10 +59,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.background {
+  background-size: 100% 100% !important;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  &.desktop {
+    background: url("../assets/images/recent-urls-background-desktop.png")
+      no-repeat bottom fixed;
+  }
+  &.mobile {
+    background: url("../assets/images/recent-urls-background-mobile.png")
+      no-repeat bottom fixed;
+  }
+}
+
 .recent-url {
-  background: url("../assets/images/recent-urls-background-desktop.png")
-    no-repeat bottom fixed;
-  background-size: 100% 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -72,6 +90,18 @@ export default {
 
   .illustration img {
     max-width: 550px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .recent-url {
+    padding-top: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .title {
+      font-size: 25px !important;
+    }
   }
 }
 

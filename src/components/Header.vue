@@ -23,6 +23,7 @@ export default {
       margin-top: 15px;
 
       @media (max-width: 991.98px) {
+        margin-left: 25px;
         max-width: 95px;
       }
     }
