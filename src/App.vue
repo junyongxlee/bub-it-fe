@@ -10,6 +10,9 @@ export default {
   components: {
     Header,
   },
+  mounted() {
+    document.title = "Bub It";
+  },
 };
 </script>
 
