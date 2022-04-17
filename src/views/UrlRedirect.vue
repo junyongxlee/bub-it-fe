@@ -24,13 +24,25 @@
           link.
         </p>
       </div>
-      <img
-        v-else
-        class="mt-5"
-        style="max-width: 350px"
-        src="../assets/images/redirecting.png"
-        alt=""
-      />
+      <div v-else class="d-flex flex-column mt-5">
+        <div class="message d-flex align-items-center" v-if="loading">
+          <div class="spinner-border me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          Finding your destination...
+        </div>
+        <div class="message" v-else>
+          Flying you to
+          <span span class="destination-title">{{ url.title }}</span>
+          ...
+        </div>
+        <img
+          class="mt-5"
+          style="max-width: 350px"
+          src="../assets/images/redirecting.png"
+          alt=""
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -46,10 +58,13 @@ export default {
   data() {
     return {
       error: false,
+      loading: true,
+      url: {},
     };
   },
   methods: {
-    getUrlThenRedirect: function () {
+    getUrlThenRedirect: async function () {
+      this.loading = true;
       axios({
         method: "GET",
         url: "url",
@@ -57,10 +72,17 @@ export default {
       }).then(
         (result) => {
           console.log(result);
-          window.location.href = this.addhttp(result.data.url.destination_url);
+          this.url = result.data.url;
+          this.loading = false;
+          setTimeout(() => {
+            window.location.href = this.addhttp(
+              result.data.url.destination_url
+            );
+          }, 2000);
         },
         (error) => {
           console.log(error);
+          this.loading = false;
           this.error = true;
         }
       );
@@ -87,6 +109,16 @@ export default {
     top: 0;
     bottom: 0;
     background: linear-gradient(142.99deg, #f5f5f3 21.49%, #faf3ec 91.63%);
+  }
+}
+
+.message {
+  font-weight: 600;
+  font-size: 25px;
+  color: #000000;
+
+  .destination-title {
+    font-weight: bold;
   }
 }
 

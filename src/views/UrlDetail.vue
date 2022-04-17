@@ -48,9 +48,9 @@
             <div class="d-flex flex-column">
               <div class="destination-title">{{ urlData.title }}</div>
               <a
-                :href="this.addhttp(urlData.destination_url)"
+                :href="this.addhttp('bub.junyong.me/' + urlData.alias)"
                 class="destination-url"
-                >{{ urlData.destination_url }}</a
+                >{{ "bub.junyong.me/" + urlData.alias }}</a
               >
             </div>
           </div>
