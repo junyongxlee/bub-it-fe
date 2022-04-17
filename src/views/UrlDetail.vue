@@ -38,15 +38,32 @@
       </h1>
       <div class="row pt-lg-3">
         <div class="col-lg-7">
-          <h2>Total URL Clicks</h2>
-          <p>The total number of clicks that your link has received so far:</p>
+          <div class="d-flex mb-4">
+            <img
+              class="me-3"
+              width="25"
+              src="../assets/icons/window-dock.svg"
+              alt=""
+            />
+            <div class="d-flex flex-column">
+              <div class="destination-title">{{ urlData.title }}</div>
+              <a
+                :href="this.addhttp(urlData.destination_url)"
+                class="destination-url"
+                >{{ urlData.destination_url }}</a
+              >
+            </div>
+          </div>
+          <p class="pt-2">
+            The total number of clicks that your link has received so far:
+          </p>
           <div
             class="
               d-flex d-lg-inline-flex
               flex-column
               align-items-center
               clicks-box
-              mb-lg-5 mb-2
+              mb-lg-4 mb-2
             "
           >
             <div class="clicks">{{ clicks.length }}</div>
@@ -87,6 +104,7 @@ export default {
   data() {
     return {
       clicks: [],
+      urlData: {},
     };
   },
   methods: {
@@ -98,6 +116,7 @@ export default {
       }).then(
         (result) => {
           this.clicks = result.data.url_clicks;
+          this.urlData = result.data.url;
           console.log(this.clicks);
         },
         (error) => {
@@ -105,11 +124,38 @@ export default {
         }
       );
     },
+    addhttp: function (url) {
+      if (!/^(?:f|ht)tps?:\/\//.test(url)) {
+        url = "http://" + url;
+      }
+      console.log(url);
+      return url;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.destination-url {
+  font-weight: 400;
+  font-size: 17px;
+  text-decoration-line: underline;
+  color: #ad8769;
+  line-height: 25px;
+}
+
+.destination-title {
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+
+#app {
+  p {
+    font-size: 17px;
+  }
+}
+
 .btn-back {
   position: absolute;
   background: #ad8769;
@@ -221,3 +267,4 @@ export default {
   }
 }
 </style>
+

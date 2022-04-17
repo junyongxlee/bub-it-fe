@@ -1,11 +1,18 @@
 <template>
   <div class="clicks-container">
-    <div class="header d-flex mb-3 px-2">
+    <div
+      v-if="clicks.length == 0"
+      class="no-clicks d-flex justify-content-center align-items-center"
+      style="height: 100px"
+    >
+      There are no clicks yet
+    </div>
+    <div v-if="clicks.length > 0" class="header d-flex mb-3 px-2">
       <div class="col-lg-1"></div>
       <div class="col-6 col-lg-6">Location</div>
       <div class="col-6 col-lg-5">Timestamp</div>
     </div>
-    <div class="body">
+    <div v-if="clicks.length > 0" class="body">
       <div
         v-for="(click, index) in clicks"
         :key="click.url_alias"
@@ -56,13 +63,13 @@ export default {
     width: 15px;
   }
 
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 15px;
+  padding: 15px 15px;
+
   @media (max-width: 991.98px) {
-    background: #ffffff;
-    border: 1px solid #e2e2e2;
-    border-radius: 15px;
-
     padding: 20px 15px;
-
     font-size: 14px;
 
     .profile-icon {
@@ -89,10 +96,10 @@ export default {
 .clicks-container .body {
   overflow: auto;
   overflow-x: hidden;
-  max-height: 32vh;
+  max-height: calc(100vh - 550px);
 
   @media (max-width: 991.98px) {
-    max-height: 26vh;
+    max-height: calc(100vh - 530px);
   }
 }
 
