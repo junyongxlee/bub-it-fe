@@ -26,6 +26,7 @@
           alt=""
         />
         <div class="ms-lg-2 d-flex flex-column">
+          <div class="destination-title">{{ destinationTitle }}</div>
           <div class="destination-url">
             {{ destinationUrl }}
           </div>
@@ -76,6 +77,7 @@ export default {
     destinationUrl: String,
     alias: String,
     createdAt: String,
+    destinationTitle: String,
   },
   methods: {
     timeStamp: function (date) {
@@ -133,6 +135,11 @@ export default {
   font-weight: 400;
   font-size: 17px;
   color: #616161;
+}
+
+.destination-title {
+  font-weight: 800;
+  color: rgba(38, 38, 38, 0.85);
 }
 
 .shortened-url {

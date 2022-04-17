@@ -45,6 +45,7 @@
           :destinationUrl="url.destination_url"
           :alias="url.alias"
           :createdAt="url.created_at"
+          :destinationTitle="url.title"
         />
       </div>
     </div>
