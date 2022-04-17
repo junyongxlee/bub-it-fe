@@ -24,7 +24,7 @@
           link.
         </p>
       </div>
-      <div v-else class="d-flex flex-column mt-5">
+      <div v-else class="d-flex flex-column align-items-center mt-5">
         <div class="message d-flex align-items-center" v-if="loading">
           <div class="spinner-border me-3" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -73,12 +73,15 @@ export default {
         (result) => {
           console.log(result);
           this.url = result.data.url;
-          this.loading = false;
+          setTimeout(() => {
+            this.loading = false;
+          }, 1000);
+
           setTimeout(() => {
             window.location.href = this.addhttp(
               result.data.url.destination_url
             );
-          }, 2000);
+          }, 3000);
         },
         (error) => {
           console.log(error);
