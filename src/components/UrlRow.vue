@@ -27,8 +27,8 @@
         />
         <div class="ms-lg-2 d-flex flex-column">
           <div class="destination-title">{{ destinationTitle }}</div>
-          <div class="destination-url">
-            {{ destinationUrl }}
+          <div class="destination-url" :title="destinationUrl">
+            {{ truncate(destinationUrl, 30) }}
           </div>
           <div class="shortened-url mb-1">bub.junyong.me/{{ alias }}</div>
           <div class="time-stamp mt-1">{{ timeStamp(createdAt) }}</div>
@@ -93,6 +93,9 @@ export default {
       setTimeout(() => {
         this.showCopiedMessage = false;
       }, 2000);
+    },
+    truncate: function (str, n) {
+      return str.length > n ? str.substr(0, n - 1) + "..." : str;
     },
   },
 };
